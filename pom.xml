@@ -27,6 +27,8 @@
         <pi4j.version>1.1</pi4j.version>
         <!-- 百度语音模块 -->
         <baidu.api.version>4.7.0</baidu.api.version>
+        
+        <jwt.version>3.3.0</jwt.version>
     </properties>
 
 	<!-- DEPENDENCIES  -->
@@ -91,6 +93,14 @@
             <artifactId>java-sdk</artifactId>
             <version>${baidu.api.version}</version>
         </dependency>
+        
+        <!-- jwt https://github.com/jwtk/jjwt  -->
+        <!-- jwt 树莓派接口鉴权  -->
+		<dependency>
+		   <groupId>com.auth0</groupId>
+		   <artifactId>java-jwt</artifactId>
+		   <version>${jwt.version}</version> 
+		</dependency>	
         
 	</dependencies>
         
