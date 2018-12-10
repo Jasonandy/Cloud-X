@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
-import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
@@ -61,6 +60,8 @@ public class GpioController {
 				pinService.provisionGpio(RaspiPin.GPIO_05, "LED", PinState.HIGH);
 				logger.info("LED亮起来!");
 				Thread.sleep(1000);
+//				gpio.shutdown();
+//				gpio.unProvisionPin(pin);
 			}else {
 				//RaspiPin.GPIO_00
 				pinService.provisionGpio(RaspiPin.GPIO_05, "LED", PinState.LOW);
@@ -85,5 +86,38 @@ public class GpioController {
 		}
 		return respBody;
     }
+	
+	
+	/**
+	 * @Description: gpioGood 
+	 * @return  RespBody
+	 * @throws InterruptedException 
+	 * @Autor: Jason
+	 */
+	@RequestMapping("/good")
+    public RespBody gpioGood() throws InterruptedException {
+		RespBody respBody = new RespBody();
+		final GpioController gpio = GpioFactory.getInstance();
+		final GpioPinPwmOutput pin = gpio.provisionPwmOutputPin(RaspiPin.GPIO_26, "MyLED", 100);
+		pin.setShutdownOptions(true, PinState.LOW);
+		int sleep_time = 10;
+	    int sleep_time2 = 7;
+	    while(true) {
+          // lighting....
+          for (int i=0; i<=100; i++) {
+              pin.setPwm(i);           
+              Thread.sleep(sleep_time);
+          }
+          // darking...
+          for (int i=100; i>0; i--) {
+              pin.setPwm(i);     
+              Thread.sleep(sleep_time2);
+          }
+          Thread.sleep(1000); // break 1 second
+	    }
+	    gpio.shutdown();
+		return respBody;
+    }
+  
 
 }
