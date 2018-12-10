@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;
+import com.pi4j.io.gpio.RaspiPin;
 
 import cn.ucaner.raspi.service.PinService;
 import cn.ucaner.raspi.vo.RespBody;
@@ -44,7 +45,7 @@ public class GpioController {
 	private PinService pinService;
 	
 	@RequestMapping("/test")
-    public RespBody jwtToken() throws InterruptedException {
+    public RespBody gpioTest() throws InterruptedException {
 		RespBody respBody = new RespBody();
 		int num = 1;
 		Pin pinByNum = pinService.getPinByNum(num);
@@ -57,15 +58,30 @@ public class GpioController {
 		
 		for (int i = 0; i < 10; i++) {
 			if (i%2 == 0) {
-				pinService.provisionGpio(num, "LED", PinState.HIGH);
+				pinService.provisionGpio(RaspiPin.GPIO_05, "LED", PinState.HIGH);
 				logger.info("LED亮起来!");
 				Thread.sleep(1000);
 			}else {
 				//RaspiPin.GPIO_00
-				pinService.provisionGpio(num, "LED", PinState.LOW);
+				pinService.provisionGpio(RaspiPin.GPIO_05, "LED", PinState.LOW);
 				logger.info("LED关掉!");
 				Thread.sleep(1000);
 			}
+		}
+		return respBody;
+    }
+	
+	
+	@RequestMapping("/demo")
+    public RespBody gpioDemo() throws InterruptedException {
+		RespBody respBody = new RespBody();
+		int num = 1;
+		Pin pinByNum = pinService.getPinByNum(num);
+		String raspiData = JSON.toJSONString(pinByNum);
+		if (raspiData!=null) {
+			respBody.addOK(JSON.toJSONString(raspiData));
+		}else {
+			respBody.addFail("调用错误");
 		}
 		return respBody;
     }

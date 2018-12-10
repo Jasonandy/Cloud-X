@@ -32,4 +32,12 @@ public interface PinService {
 	 * @return
 	 */
 	GpioPinDigitalOutput provisionGpio(int num, String name, PinState state);
+
+	/**
+	 * @Description: provisionGpio
+	 * @param pin
+	 * @param name
+	 * @Autor: Jason
+	 */
+	void  provisionGpio(Pin pin, String name, PinState high);
 }

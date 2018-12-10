@@ -33,6 +33,9 @@ public class PinServiceImpl implements PinService{
 	private static GpioPinDigitalOutput[] outputList = null; 
 
 	
+	/**
+	 * gitPinByNum
+	 */
 	@Override
 	public Pin getPinByNum(int num) {
 		if (num < 0 || num > 31) {
@@ -60,6 +63,15 @@ public class PinServiceImpl implements PinService{
 			outputList[num] = gpio.provisionDigitalOutputPin(getPinByNum(num), "PIN"+num, state);
 		}
 		return outputList[num];
+	}
+
+	/**
+	 * provisionGpio
+	 */
+	@Override
+	public void provisionGpio(Pin pin, String name, PinState state) {
+		GpioController gpio = GpioFactory.getInstance();
+		gpio.provisionDigitalOutputPin(pin, name, state);
 	}
 	
 
