@@ -24,7 +24,16 @@
         <java.version>1.8</java.version>
         
         <!-- pi4j 树莓派  -->
-        <pi4j.version>1.1</pi4j.version>
+        <!--  
+	        Unable to determine hardware version. I see: Hardware	: BCM2835
+			 - expecting BCM2708 or BCM2709.
+			If this is a genuine Raspberry Pi then please report this
+			to projects@drogon.net. If this is not a Raspberry Pi then you
+			are on your own as wiringPi is designed to support the
+			Raspberry Pi ONLY.    变更版本 兼容问题 1.2-SNAPSHOT
+        -->
+        
+        <pi4j.version>1.2-SNAPSHOT</pi4j.version>
         <!-- 百度语音模块 -->
         <baidu.api.version>4.7.0</baidu.api.version>
         
@@ -128,6 +137,18 @@
 		</dependency>	
         
 	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>oss-snapshots-repo</id>
+			<name>Sonatype OSS Maven Repository</name>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
         
 	<!-- maven-plugin -->
 	<build>
