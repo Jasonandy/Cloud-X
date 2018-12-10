@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.GpioPinPwmOutput;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
@@ -96,9 +98,8 @@ public class GpioController {
 	 * @Autor: Jason
 	 */
 	@RequestMapping("/good")
-    public RespBody gpioGood() throws InterruptedException {
-		RespBody respBody = new RespBody();
-		final GpioController gpio = GpioFactory.getInstance();
+    public void gpioGood() throws InterruptedException {
+		final com.pi4j.io.gpio.GpioController gpio = GpioFactory.getInstance();
 		final GpioPinPwmOutput pin = gpio.provisionPwmOutputPin(RaspiPin.GPIO_26, "MyLED", 100);
 		pin.setShutdownOptions(true, PinState.LOW);
 		int sleep_time = 10;
@@ -108,17 +109,18 @@ public class GpioController {
           for (int i=0; i<=100; i++) {
               pin.setPwm(i);           
               Thread.sleep(sleep_time);
+              System.out.println("第"+i+"次");
           }
           // darking...
           for (int i=100; i>0; i--) {
               pin.setPwm(i);     
               Thread.sleep(sleep_time2);
+              System.out.println("第"+i+"次");
           }
           Thread.sleep(1000); // break 1 second
-	    }
-	    gpio.shutdown();
-		return respBody;
+      }
     }
+	
   
 
 }
