@@ -131,14 +131,37 @@
         
 	<!-- maven-plugin -->
 	<build>
+		<resources>
+	        <resource>
+	        	<directory>src/main/resources</directory>
+	        </resource>
+	        <resource>
+	            <directory>src/main/java</directory>
+	             <includes>
+	                 <include>**/*.properties</include>
+	                 <include>**/*.xml</include>
+	             </includes>
+	            <filtering>false</filtering>
+	        </resource>
+        </resources>
 	    <plugins>
 	        <plugin>
-	            <groupId>org.springframework.boot</groupId>
-	            <artifactId>spring-boot-maven-plugin</artifactId>
-	            <configuration>
-	                <fork>true</fork>
-	            </configuration>
-	        </plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	                <configuration>
+	                    <executable>true</executable>
+	                </configuration>
+	                <executions>
+	                    <execution>
+	                        <goals>
+	                            <goal>repackage</goal>
+	                        </goals>
+	                        <configuration>
+	                            <classifier>exec</classifier>
+	                        </configuration>
+	                    </execution>
+	                </executions>
+	            </plugin>
 	    </plugins>
 	</build>
 	
