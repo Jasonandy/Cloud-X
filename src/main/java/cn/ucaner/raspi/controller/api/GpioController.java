@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.GpioPinPwmOutput;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;
@@ -121,6 +122,29 @@ public class GpioController {
       }
     }
 	
-  
+	
+	/**
+	 * @Description: gpioLed
+	 * @throws InterruptedException 
+	 * @Autor: Jason
+	 */
+	@RequestMapping("/led")
+    public void gpioLed() throws InterruptedException {
+		final com.pi4j.io.gpio.GpioController gpio = GpioFactory.getInstance();
+	    /**
+		 * 定义编号为0的引脚为数字输出引脚,初始化为低电平
+		 */
+	    GpioPinDigitalOutput ledBlink = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "01" ,PinState.LOW);
+	    int i = 100;
+	    while(i <= 150){
+	    	ledBlink.high();
+	    	logger.info("LED亮起来!");
+	        Thread.sleep(500);
+	        ledBlink.low();
+	        logger.info("LED被灭掉!");
+	        Thread.sleep(500);
+	        i++;
+	    }
+    }
 
 }
