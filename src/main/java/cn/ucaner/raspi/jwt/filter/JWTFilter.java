@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.ucaner.raspi.jwt.properties.JwtPatternUrl;
-import cn.ucaner.raspi.jwt.properties.JwtProperty;
 
 /**     
 * @Package：cn.ucaner.raspi.jwt.filter   
@@ -41,8 +40,8 @@ import cn.ucaner.raspi.jwt.properties.JwtProperty;
 */
 public class JWTFilter implements  Filter{
 
-    @Autowired
-    private JwtProperty jwtProperty;
+    //@Autowired
+    //private JwtProperty jwtProperty;
 
     /**
      * jwt需要做处理的连接
@@ -53,7 +52,7 @@ public class JWTFilter implements  Filter{
     
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("init");
+		//System.out.println("init");
 	}
 
 	@Override
@@ -69,15 +68,14 @@ public class JWTFilter implements  Filter{
         String url = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 		if (isInclude(url)) {
             chain.doFilter(httpRequest, httpResponse);
-            System.out.println("UUURRRLLLdoFilter");
             return;
 		}
-		System.out.println(jwtProperty.getAuthorFlag());
+		//System.out.println(jwtProperty.getAuthorFlag());
 	}
 
 	@Override
 	public void destroy() {
-		System.out.println("destroy");
+		//System.out.println("destroy");
 	}
 	
 	 /**
