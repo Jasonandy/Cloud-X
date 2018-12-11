@@ -24,6 +24,7 @@ import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
+import cn.ucaner.raspi.listener.GpioListener;
 import cn.ucaner.raspi.service.PinService;
 import cn.ucaner.raspi.vo.RespBody;
 
@@ -76,7 +77,12 @@ public class GpioController {
 		return respBody;
     }
 	
-	
+	/**
+	 * @Description: gpioDemo  gpio demo演示
+	 * @return
+	 * @throws InterruptedException RespBody
+	 * @Autor: Jason
+	 */
 	@RequestMapping("/demo")
     public RespBody gpioDemo() throws InterruptedException {
 		RespBody respBody = new RespBody();
@@ -145,6 +151,19 @@ public class GpioController {
 	        Thread.sleep(500);
 	        i++;
 	    }
+	    GpioListener.startUp();
     }
+	
+	
+	/**
+	 * @Description: 启动监听器
+	 * @Autor: Jason
+	 */
+	@RequestMapping("/listen")
+    public void gpioStartUp(){
+	    GpioListener.startUp();
+    }
+	
+	
 
 }
