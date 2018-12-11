@@ -19,25 +19,32 @@
 # Raspi-X 
 * Project：Raspi-X
 * OfficialWebsite：http://raspi.ucaner.cn
-* Describe： 树莓派平台 
+* Describe： Based on spring-boot & raspiberry2b+  
 
 
-## 一、Raspi-X 简介
+## 一、Raspi-X
 
 	Raspi-X 这个项目是基于Spring-boot搭建的JavaWeb后台控制项目!
-旨在通过Springboot搭建web服务端,通过内网穿透的方式,web端远程控制树莓派执行相关的操作。
+	旨在通过Springboot搭建web服务端,通过内网穿透的方式,web端远程控制树莓派执行相关的操作。
 
 > 树莓派2B
+
 > USB线
+
 > LED
+
 > 路由器
+
 > 树莓派Raspbain
+
 > 数字电路基础
+
 > 单片机基础
+
 > C51 汇编
 
 
-## 二、进度安排
+## 二、实施方案
 
 > 技术清单
 - [X] Spring-boot2.0
@@ -45,7 +52,6 @@
 - [X] GPIO
 - [X] JWT鉴权
 - [X] JavaWeb后台
-
 
 
 [RaspiX](https://github.com/Jasonandy/Cloud-X)
@@ -56,13 +62,21 @@
 > You are what you want to be.
 
 * 1.树莓派Linux环境的搭建
+```properties
+
+
+```
 
 * 2.PI4J环境的搭建
 
 * 3.spring-boot部署
 
 ``` xml
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 	
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
 	
 	<!-- raspi  -->
@@ -184,16 +198,15 @@
             <version>1.0.1</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+       <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.54</version>
 		</dependency>
         
-        
-        <!-- jwt https://github.com/jwtk/jjwt  -->
-        <!-- jwt 树莓派接口鉴权  -->
+       <!-- jwt https://github.com/jwtk/jjwt  -->
+       <!-- jwt 树莓派接口鉴权  -->
 		<dependency>
 		   <groupId>com.auth0</groupId>
 		   <artifactId>java-jwt</artifactId>
@@ -253,17 +266,8 @@
 ```
 
 * 4.example-api
+
 ```java
-/**
- * <html>
- * <body>
- *  <P> Copyright JasonInternational</p>
- *  <p> All rights reserved.</p>
- *  <p> Created on 2018年12月10日 下午12:38:47</p>
- *  <p> Created by Jason </p>
- *  </body>
- * </html>
- */
 package cn.ucaner.raspi.controller.api;
 
 import org.slf4j.Logger;
@@ -287,7 +291,7 @@ import cn.ucaner.raspi.vo.RespBody;
 /**     
 * @Package：cn.ucaner.raspi.controller.api   
 * @ClassName：GpioController   
-* @Description：   <p> GpioController </p>
+* @Description：   <p> GpioController   GPIO 控制器</p>
 * @Author： - Jason   
 * @CreatTime：2018年12月10日 下午12:38:47   
 * @Modify By：   
@@ -353,7 +357,6 @@ public class GpioController {
 		return respBody;
     }
 	
-	
 	/**
 	 * @Description: gpioGood 
 	 * @return  RespBody
@@ -383,7 +386,6 @@ public class GpioController {
           Thread.sleep(1000); // break 1 second
       }
     }
-	
 	
 	/**
 	 * @Description: gpioLed
@@ -417,9 +419,7 @@ public class GpioController {
     public void gpioStartUp(){
 	    GpioListener.startUp();
     }
-
 }
-
 ```
 
 ```java
