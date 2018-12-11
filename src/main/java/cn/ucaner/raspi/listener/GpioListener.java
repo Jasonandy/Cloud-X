@@ -12,6 +12,9 @@ package cn.ucaner.raspi.listener;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
@@ -32,6 +35,10 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 * @version    V1.0
 */
 public class GpioListener  implements GpioPinListenerDigital{
+	
+
+	private static final Logger logger = LoggerFactory.getLogger(GpioListener.class);
+	
 
 	/**
 	 * GpioController 
@@ -63,6 +70,7 @@ public class GpioListener  implements GpioPinListenerDigital{
 	 * @Autor: Jason
 	 */
 	public static void startUp() {
+		logger.info("startUp启动成功!");
 		new GpioListener().run();
 	}
 	
@@ -74,7 +82,8 @@ public class GpioListener  implements GpioPinListenerDigital{
 	public void run() {
         BUTTON.addListener(this);//时间加入进去
         scanner = new Scanner(System.in);
-        scanner.nextLine();
+        String nextLine = scanner.nextLine();
+        logger.info("输入的信息为：{}",nextLine);
     }
 	
 	
@@ -84,7 +93,8 @@ public class GpioListener  implements GpioPinListenerDigital{
 	@Override
 	public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
 		boolean state = event.getState().isHigh();
-		System.out.println("--->pin:" + event.getPin() + "|state:" + state);
+		//System.out.println("--->pin:" + event.getPin() + "|state:" + state);
+		logger.info("--->pin: {} |state: {}",event.getPin(),state);
 		if (state) {
 			LED.high();
 		}else {
