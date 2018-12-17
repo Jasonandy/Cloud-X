@@ -15,9 +15,9 @@ public interface GpioService {
 
 	/**
 	 * 置一个端口为正或负
-	 * @param portNum
-	 * @param status
-	 * @return
+	 * @param  portNum
+	 * @param  status
+	 * @return dealPort 
 	 */
 	boolean dealPort(int portNum , boolean status);
 	
@@ -26,22 +26,22 @@ public interface GpioService {
 	 * @param portNum
 	 * @param status
 	 * @param time
-	 * @return
+	 * @return dealPortWithTime
 	 */
 	boolean dealPortWithTime(int portNum , boolean status , long time);
 	
 	/**
 	 * 取反一个端口
-	 * @param portNum
-	 * @return
+	 * @param  portNum
+	 * @return reversePort
 	 */
 	boolean reversePort(int portNum);
 	
 	/**
 	 * 处理树莓派所有端口的正负性
-	 * 输入一串包含0和1的字符串
+	 * 输入一串包含0和1的字符串   "01010101010101001" -- 类似
 	 * @param allPortStatus
-	 * @return
+	 * @return dealAllPort
 	 */
 	boolean dealAllPort(String allPortStatus);
 }
